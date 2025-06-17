@@ -1,61 +1,35 @@
 {% load static %}
 
 <html>
+    <head>
+        <title>Clasicos del Rock Nacional</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
 
+    </head>
 
-<head>
-    <title>Clásicos del Rock Nacional</title>
-</head>
-
-<body>
-    <div> 
-    <h1><a href="/">Clásicos del Rock Nacional</a></h1>
-    </div>
-    <!-- Filtro por usuario usando enlaces -->
-    <div class="filtro-usuarios">
-    <strong>Filtrar por autor:</strong>
-   
-    <!-- Opción "Todos" -->
-    <a href="?" class="usuario-filtro {% if not usuario_activo %}activo{% endif %}">
-        Todos
-    </a>
-   
-    <!-- Opciones por usuario -->
-    {% for usuario in usuarios %}
-        <a href="?usuario={{ usuario.id }}"
-           class="usuario-filtro {% if usuario_activo == usuario.id %}activo{% endif %}">
-            {{ usuario.username }}
-        </a>
-    {% endfor %}
-   </div>
-
-   <!-- Lista de publicaciones -->
-
-   <div>
-    {% for publicacion in publicaciones %}
-    <p>Publicado: {{ publicacion.fecha_publicacion }} por autor/a: {{ publicacion.autor.username }} </p>
-    <h2> <a href=""> {{publicacion.titulo}} </a> </h2>
-    <p> {{ publicacion.texto|linebreaksbr }} </p>
-    <hr>    
-    {% endfor %}
-   </div>
-
-    <hr>
-
-    <div style="display: flex; gap: 20px;">
-    <img src="{% static 'imagenes/ahi_vamos.jpeg' %}" width="200px">
-
-    <div>
-        <h2>Ahí Vamos - Gustavo Cerati</h2>
-        <p>Con Ahí Vamos, Cerati volvió al rock más directo tras años de explorar sonidos electrónicos. El disco nació de su necesidad de reconectar con la energía de las guitarras, y se convirtió en uno de los puntos más altos de su carrera solista. Temas como Crimen, La excepción y Adiós muestran su madurez artística sin perder intensidad.</p>
-        <h4>Canción destacada: "Adiós". </h4>
-        <p>Una balada melancólica y elegante sobre el cierre de una relación. Su letra honesta y la interpretación sentida de Cerati la convierten en el corazón emocional del disco.</p>
-    </div>
+    <body>
+    <div class="page-header">
+        <h1>Clásicos del Rock Nacional</h1>
     </div>
 
-    <hr>
+        {% for publicacion in publicaciones %}
+            <div class="publicacion">
+                <img src="{{ publicacion.imagen }}">
+                <div class="contenido">
+                    <h2>{{ publicacion.titulo }}</h2>
+                    <p>{{ publicacion.texto|linebreaksbr }}</p>
 
-</body>
+                    {% if publicacion.cancion_destacada %}
+                        <p class="cancion">Canción destacada: {{ publicacion.cancion_destacada }}</p>
+                    {% endif %}
 
-
+                    {% if publicacion.motivo_destacada %}
+                        <p class="motivo">{{ publicacion.motivo_destacada }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </body>
 </html>
