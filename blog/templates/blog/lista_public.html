@@ -1,11 +1,10 @@
 {% load static %}
-
 <html>
     <head>
         <title>Clasicos del Rock Nacional</title>
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+        <link rel="stylesheet" href="{% static 'css/discos.css' %}">
 
     </head>
 
@@ -15,7 +14,7 @@
     </div>
 
         {% for publicacion in publicaciones %}
-            <div class="publicacion">
+            <div class="Discos">
                 <img src="{{ publicacion.imagen }}">
                 <div class="contenido">
                     <h2>{{ publicacion.titulo }}</h2>
